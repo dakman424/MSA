@@ -1,18 +1,22 @@
 {
 "version": "2.0.0",
 "configurations": [
-     {
-        "name" : "debug",
-        "cwd" : "${workspaceRoot}",
-        "device" : "STM32F105RCT6",
-        "executable" : "${workspaceRoot}/build/${workspaceFolderBasename}.elf",
-        "request" : "launch",
-        "runToEntryPoint" : "main",
-        "servertype" : "stutil",
-        "showDevDebugOutput" : "raw",
-        "svdFile" : "${workspaceRoot}/STM32F103xx.svd",
-        "type" : "cortex-debug",
-        "preRestartCommands" : [ "load", "enable breakpoint", "monitor reset" ],
-      }
+  {
+    "cwd": "${workspaceRoot}",
+    "device": "STM32F103RBT6",
+    "executable": "${workspaceRoot}/build/${workspaceFolderBasename}.elf",
+    "name": "Cortex Debug (generated)",
+    "preRestartCommands": [
+      "load",
+      "enable breakpoint",
+      "monitor reset"
+    ],
+    "request": "launch",
+    "runToEntryPoint": "main",
+    "servertype": "stutil",
+    "showDevDebugOutput": "raw",
+    "svdFile": "${workspaceRoot}/STM32F103xx.svd",
+    "type": "cortex-debug"
+  },
     ]
     }
