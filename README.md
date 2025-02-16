@@ -1,2 +1,2 @@
 # MSA
-Main MSA code
+MSA code from Archlinux
