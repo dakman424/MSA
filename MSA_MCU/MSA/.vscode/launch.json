@@ -1,18 +1,31 @@
 {
-"version": "2.0.0",
-"configurations": [
-     {
-        "name" : "debug",
-        "cwd" : "${workspaceRoot}",
-        "device" : "STM32F105RCT6",
-        "executable" : "${workspaceRoot}/build/${workspaceFolderBasename}.elf",
-        "request" : "launch",
-        "runToEntryPoint" : "main",
-        "servertype" : "stutil",
-        "showDevDebugOutput" : "raw",
-        "svdFile" : "${workspaceRoot}/STM32F103xx.svd",
-        "type" : "cortex-debug",
-        "preRestartCommands" : [ "load", "enable breakpoint", "monitor reset" ],
-      }
-    ]
-    }
+	    "version": "0.2.0",
+	    "configurations": [
+	        {
+	            "name": "Cortex Debug",
+	            "cwd": "${workspaceRoot}",
+	            "executable": "build/${workspaceFolderBasename}.elf",
+	            "request": "launch",
+	            "type": "cortex-debug",
+	            "servertype": "openocd",
+	            "runToMain": true,
+	            "preLaunchTask": "build",
+	            "device": "STM32F411RE",
+	            "svdFile": "${workspaceRoot}/Docs/STM32F411.svd",
+	            "configFiles": [
+	                "interface/stlink.cfg",
+	                "target/stm32f4x.cfg"
+	            ],
+	 
+	            "swoConfig": {
+	                "enabled": true,
+	                "cpuFrequency": 8000000,
+	                "swoFrequency": 2000000,
+	                "source": "probe",
+	                "decoders": [
+	                    { "type": "console", "label": "ITM", "port": 0 }
+	                ]
+	            }
+	        }
+	    ]
+	}
