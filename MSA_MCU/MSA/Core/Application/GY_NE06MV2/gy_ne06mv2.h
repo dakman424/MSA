@@ -4,7 +4,7 @@
 #include "stdint.h"
 
 typedef struct gy_ne06mv2 gy_ne06mv2;
-
+typedef struct gy_queue_piece gy_queue_piece;
 
 errcode gy_init();
 errcode gy_service(void * buf, size_t data_size);
