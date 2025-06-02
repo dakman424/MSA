@@ -1,0 +1,82 @@
+{
+  "version": "2.0.0",
+  "configurations": [
+    {
+      "cwd": "${workspaceRoot}",
+      "device": "STM32F411CEU6",
+      "executable": "${workspaceRoot}/build/${workspaceFolderBasename}.elf",
+      "name": "Cortex Debug (generated)",
+      "preRestartCommands": [
+        "load",
+        "enable breakpoint",
+        "monitor reset"
+      ],
+      "request": "launch",
+      "servertype": "stutil",
+      "serverArgs": [],
+      "showDevDebugOutput": "raw",
+      "svdFile": "${workspaceRoot}/STM32F411.svd",
+      "type": "cortex-debug"
+    },
+    {
+      "name": "STM32F411 Debug",
+      "cwd": "${workspaceRoot}",
+      "executable": "build/MCA_F411xC.elf",
+      "request": "launch",
+      "type": "cortex-debug",
+      "servertype": "stutil",
+      "showDevDebugOutput": "raw",
+      "device": "STM32F411",
+      "svdFile": "STM32F411.svd",
+      "configFiles": [
+        "interface/stlink.cfg",
+        "target/stm32f4x.cfg"
+      ]
+    },
+    {
+      "name": "STM32",
+      "cwd": "${workspaceRoot}",
+      "executable": "build/${workspaceFolderBasename}.elf",
+      "request": "launch",
+      "type": "cortex-debug",
+      "servertype": "openocd",
+      "preLaunchTask": "build",
+      "gdbPath": "gdb",
+      "configFiles": [
+        "interface/stlink.cfg",
+        "target/stm32g4x.cfg"
+      ],
+      "showDevDebugOutput": "none",
+      "swoConfig": {
+        "enabled": true,
+        "swoFrequency": 2000000,
+        "cpuFrequency": 170000000,
+        "decoders": [
+          {
+            "port": 0,
+            "type": "console"
+          }
+        ]
+      }
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "e:/Projects/MSA/MCA_F411/MCA_F411xC/Core/Src/Application/Observer",
+      "program": "e:/Projects/MSA/MCA_F411/MCA_F411xC/Core/Src/Application/Observer/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
