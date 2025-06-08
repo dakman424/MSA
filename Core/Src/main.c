@@ -20,7 +20,7 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "fatfs.h"
-
+#include "BMP280/bmp280.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "common.h"
@@ -399,12 +399,20 @@ static void MX_GPIO_Init(void)
 void StartDefaultTask(void const * argument)
 {
   /* USER CODE BEGIN 5 */
+  BMP280_HandleTypedef bmp280;
+  bmp280_init_default_params(&bmp280.params);
+	bmp280.addr = BMP280_I2C_ADDRESS_1;
+	bmp280.i2c = &hi2c2;
   /* Infinite loop */
   for(;;)
   {
-        
+    while (!bmp280_init(&bmp280, &bmp280.params)) {
+      osDelay(1);
+    } 
 
-    osDelay(1);
+    osDelay(100);
+    
+    
   }
   /* USER CODE END 5 */
 }

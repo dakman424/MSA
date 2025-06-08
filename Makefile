@@ -44,6 +44,7 @@ Core/Src/Application/Observer/observer.c \
 Core/Src/Application/Application.c \
 Core/Src/microTerminal/src/microrl.c \
 Core/Src/Application/SDCard/SDCard.c \
+Core/Src/Application/BMP280/bmp280.c \
 Core/Src/main.c \
 Core/Src/stm32f4xx_it.c \
 Core/Src/stm32f4xx_hal_msp.c \
@@ -149,6 +150,7 @@ C_INCLUDES =  \
 -ICore/Src/Application/GY_NE06MV2 \
 -ICore/Src/Application/FRAM \
 -ICore/Src/Application/SDCard \
+-ICore/Src/Application/BMP280 \
 -ICore/Src/microTerminal/src \
 -IDrivers/STM32F4xx_HAL_Driver/Inc \
 -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy \
