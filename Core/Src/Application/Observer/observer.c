@@ -21,15 +21,17 @@ Observer * CreateObserve() {
         return NULL;
     }
     this->Gyne06m = (Sensor_data *)malloc(sizeof(Sensor_data));
+    this->Gyne06m->data = (gy_ne06mv2_export*)malloc(sizeof(Sensor_data));
     if (this->Gyne06m == NULL){
         return NULL;
     }
     this->MPU = (Sensor_data *)malloc(sizeof(Sensor_data));
+    this->MPU->data = (gy_ne06mv2_export*)malloc(sizeof(Sensor_data));
     if (this->MPU == NULL){
         return NULL;
     }
     this->Gyne06m->type = SENSOR_GYNE06;
-    this->Gyne06m->type = SENSOR_MPU;
+    this->MPU->type = SENSOR_MPU;
     return this;
 } 
 
@@ -48,7 +50,9 @@ errcode getSensorData(Observer *Observer, void *data, Sensor_type_t type, size_t
     case SENSOR_GYNE06:
         memcpy(data, &Observer->Gyne06m->data, size);
         break;
-    
+    case SENSOR_MPU:
+        memcpy(data, &Observer->MPU->data, size);
+        break;
     default:
         return ERROR_ERROR;
     }

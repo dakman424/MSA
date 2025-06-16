@@ -25,6 +25,7 @@
 /* USER CODE BEGIN Includes */
 #include "common.h"
 #include "SDCard/SDCard.h"
+#include "MPU/mpu6050.h"
 /* USER CODE END Includes */
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
@@ -128,8 +129,8 @@ int main(void)
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
-  defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
+  // osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
+  // defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* USER CODE END RTOS_THREADS */
@@ -398,17 +399,18 @@ static void MX_GPIO_Init(void)
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
-  /* USER CODE BEGIN 5 */
-  BMP280_HandleTypedef bmp280;
-  bmp280_init_default_params(&bmp280.params);
-	bmp280.addr = BMP280_I2C_ADDRESS_1;
-	bmp280.i2c = &hi2c2;
+  // /* USER CODE BEGIN 5 */
+  // BMP280_HandleTypedef bmp280;
+  // bmp280_init_default_params(&bmp280.params);
+	// bmp280.addr = BMP280_I2C_ADDRESS_1;
+	// bmp280.i2c = &hi2c2;
+  mpu_init();
   /* Infinite loop */
   for(;;)
   {
-    while (!bmp280_init(&bmp280, &bmp280.params)) {
-      osDelay(1);
-    } 
+    // while (!bmp280_init(&bmp280, &bmp280.params)) {
+    //   osDelay(1);
+    // } 
 
     osDelay(100);
     

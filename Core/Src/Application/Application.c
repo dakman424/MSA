@@ -4,9 +4,11 @@
 #include "Sensor.h"
 #include "cmsis_os.h"
 #include "fatfs.h"
+#include "mpu6050.h"
 
 static Observer *Sensor_wiewer = NULL;
 static Sensor *Sensor_Gyne06 = NULL;
+static Sensor *Sensor_MPU = NULL;
 osThreadId SensorService;
 osThreadId Terminal;
 osThreadId Logger_tusk;
@@ -15,11 +17,17 @@ FATFS fs; // Файловая система
 FIL fil; // Файл
 BYTE work[512]; // Рабочий буфер
 
+errcode getObserveData_GENE06(void *data, size_t size);
+errcode getObserveData_MPU(void *data, size_t size);
+
 void Service(void) {
     while (1)
     {
         if (Sensor_Gyne06 != NULL) {
             ServiceSensor(Sensor_Gyne06);
+        }
+        if (Sensor_MPU != NULL) {
+            ServiceSensor(Sensor_MPU);
         }
         osDelay(1);
     }
@@ -50,9 +58,14 @@ void Data_log_Service(void) {
     while(1) {
         if (f_open(&fil, "0:/Data", FA_WRITE) == FR_OK) {
             f_lseek(&fil, f_size(&fil));
-            if (getObserveData_GENE06(&buf, sizeof(gy_ne06mv2_export)) == ERROR_OK) {
+            if (getObserveData_GENE06(&buf, sizeof(gy_ne06mv2_export)) == ERROR_OK) { 
                 f_write(&fil, "GY ", 3, &size);
                 f_write(&fil, buf, sizeof(gy_ne06mv2_export), &size);
+                f_write(&fil, "\n\r", 2, &size);
+            }
+            if (getObserveData_MPU(&buf, 32) == ERROR_OK) { 
+                f_write(&fil, "MPU ", 4, &size);
+                f_write(&fil, buf, 32, &size);
                 f_write(&fil, "\n\r", 2, &size);
             }
             f_close(&fil);
@@ -100,7 +113,27 @@ errcode Application_Init(void) {
     if (AddSubscriber(Sensor_Gyne06, Sensor_wiewer) != ERROR_OK) {
         return ERROR_ERROR;
     }
-    
+
+    tmpdata.buflen = 16;
+    tmpdata.Type = SENSOR_MPU;
+    tmpdata.Configs_Handler = mpu_init;
+    tmpdata.Event_Handler = NotifySubs;
+    tmpdata.Service_Handler = mpu_service;
+
+    Sensor_MPU = CreateSensor(&tmpdata);
+    if (Sensor_MPU == NULL) {
+        return ERROR_ERROR;
+    }
+
+    if (InitSensor(Sensor_MPU) != ERROR_OK) {
+        return ERROR_ERROR;
+    }
+
+    if (AddSubscriber(Sensor_MPU, Sensor_wiewer) != ERROR_OK) {
+        return ERROR_ERROR;
+    }
+
+
     osThreadDef(SensorTusk, Service, osPriorityNormal, 0, 512);
     SensorService = osThreadCreate(osThread(SensorTusk), NULL);
 
@@ -115,4 +148,7 @@ errcode Application_Init(void) {
 
 errcode getObserveData_GENE06(void *data, size_t size) {
     return getSensorData(&Sensor_wiewer, data , SENSOR_GYNE06, size);
+}
+errcode getObserveData_MPU(void *data, size_t size) {
+    return getSensorData(&Sensor_wiewer, data , SENSOR_MPU, size);
 }
