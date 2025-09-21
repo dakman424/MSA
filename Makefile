@@ -45,6 +45,9 @@ Core/Src/Application/Application.c \
 Core/Src/microTerminal/src/microrl.c \
 Core/Src/Application/SDCard/SDCard.c \
 Core/Src/Application/BMP280/bmp280.c \
+Core/Src/Application/MPU/mpu6050.c \
+Core/Src/Application/MS5611/MS5611.c \
+Core/Src/Application/Indications/beeper.c \
 Core/Src/main.c \
 Core/Src/stm32f4xx_it.c \
 Core/Src/stm32f4xx_hal_msp.c \
@@ -151,7 +154,10 @@ C_INCLUDES =  \
 -ICore/Src/Application/FRAM \
 -ICore/Src/Application/SDCard \
 -ICore/Src/Application/BMP280 \
+-ICore/Src/Application/MPU \
 -ICore/Src/microTerminal/src \
+-ICore/Src/Application/MS5611 \
+-ICore/Src/Application/Indications \
 -IDrivers/STM32F4xx_HAL_Driver/Inc \
 -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy \
 -IDrivers/CMSIS/Device/ST/STM32F4xx/Include \

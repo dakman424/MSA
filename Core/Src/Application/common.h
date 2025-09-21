@@ -9,9 +9,9 @@ typedef enum
 
 typedef enum Sensor_type{
     SENSOR_GYNE06 = 0,
-    SENSOR_MPU = 1
-} Sensor_type_t;
+    SENSOR_MPU = 1,
+    SENSOR_MS5611 = 2
 
-errcode getObserveData_GENE06(void *data, size_t size);
+} Sensor_type_t;
 
 #endif

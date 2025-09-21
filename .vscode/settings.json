@@ -78,7 +78,11 @@
     "common.h": "c",
     "sensor.h": "c",
     "sdcard.h": "c",
-    "fatfs.h": "c"
+    "fatfs.h": "c",
+    "mpu6050.h": "c",
+    "math.h": "c",
+    "ms5611.h": "c",
+    "beeper.h": "c"
   },
   "cortex-debug.variableUseNaturalFormat": true
 }

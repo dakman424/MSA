@@ -105,7 +105,7 @@ errcode ServiceSensor(Sensor *S_this)
             // for(uint8_t i = 0; i < OBSERVERS_MAX; i++) {
                 if (S_this->Observes_handlers !=NULL) {
                     ObserveEvent local_event = {.SensorType = S_this->type, .buf = S_this->current_buf, .size = S_this->bufSize};
-                    return (S_this->Observes_handlers)(&S_this->Subscriber, &local_event);
+                    return (S_this->Observes_handlers)(S_this->Subscriber, &local_event);
                 }
             // }
         } 

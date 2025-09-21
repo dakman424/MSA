@@ -66,8 +66,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "e:/Projects/MSA/MCA_F411/MCA_F411xC/Core/Src/Application/Observer",
-      "program": "e:/Projects/MSA/MCA_F411/MCA_F411xC/Core/Src/Application/Observer/build/Debug/outDebug",
+      "cwd": "e:/Projects/MSA/MCA_F411/MCA_F411xC/Core/Src/Application",
+      "program": "e:/Projects/MSA/MCA_F411/MCA_F411xC/Core/Src/Application/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
