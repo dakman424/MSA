@@ -1,0 +1,25 @@
+syntax = "proto2";
+
+message request_uniqe_number {
+    required uint64 Index = 1 [default = 0];
+    required int64 number = 2;
+}
+
+message request_Temp {
+    required uint64 Index = 1 [default = 1];
+    required float temp = 2;
+}
+
+message coordinates {
+    required string side = 1;
+    required float minutes = 2;
+    required float ouers = 3;
+}
+message request_GPS {
+    required int64 Index = 1 [default = 2];
+    required bool IsVisebleSputnik = 2;
+    required int64 minutes = 3;
+    required int64 hours = 4;
+    repeated coordinates longitude = 5;
+    repeated coordinates latitude = 6;
+}

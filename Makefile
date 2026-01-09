@@ -86,7 +86,14 @@ FATFS/App/fatfs.c \
 Middlewares/Third_Party/FatFs/src/diskio.c \
 Middlewares/Third_Party/FatFs/src/ff.c \
 Middlewares/Third_Party/FatFs/src/ff_gen_drv.c \
-Middlewares/Third_Party/FatFs/src/option/syscall.c
+Middlewares/Third_Party/FatFs/src/option/syscall.c \
+proto/nanopb/pb_common.c \
+proto/nanopb/pb_decode.c \
+proto/nanopb/pb_encode.c \
+proto/msa_descr/MSA_server.pb.c
+
+
+
 
 
 # ASM sources
@@ -167,7 +174,9 @@ C_INCLUDES =  \
 -IMiddlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS \
 -IFATFS/Target \
 -IFATFS/App \
--IMiddlewares/Third_Party/FatFs/src
+-IMiddlewares/Third_Party/FatFs/src \
+-Iproto/nanopb \
+-Iproto/msa_descr
 
 
 # compile gcc flags
