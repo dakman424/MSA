@@ -1,0 +1,3 @@
+[submodule "ptoto/nanopb/nanopb"]
+	path = proto/nanopb/nanopb
+	url = https://github.com/nanopb/nanopb.git
