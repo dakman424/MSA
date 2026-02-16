@@ -1,6 +1,6 @@
 /* vim: set ai et ts=4 sw=4: */
 
-#include "sdcard.h"
+#include "SDCard.h"
 
 static void SDCARD_Select() {
     HAL_GPIO_WritePin(SDCARD_CS_GPIO_Port, SDCARD_CS_Pin, GPIO_PIN_RESET);
